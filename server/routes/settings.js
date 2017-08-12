@@ -4,7 +4,6 @@ const router = express.Router();
 const SettingsController = require('../controllers').Settings;
 
 router.route('/')
-  .post(SettingsController.create)
   .get(SettingsController.getAll);
 
 router.route('/:id')

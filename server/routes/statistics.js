@@ -4,7 +4,6 @@ const router = express.Router();
 const StatisticsController = require('../controllers').Statistics;
 
 router.route('/')
-  .post(StatisticsController.create)
   .get(StatisticsController.getAll);
 
 router.route('/:id')
