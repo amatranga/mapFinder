@@ -4,9 +4,11 @@ const router = express.Router();
 const AchievementsController = require('../controllers').Achievements;
 
 router.route('/')
-  .post(AchievementsController.create);
+  .post(AchievementsController.create)
+  .get(AchievementsController.getAll);
 
-router.route('/achievements/:id')
-  .get(AchievementsController.updateById);
+router.route('/:id')
+  .get(AchievementsController.getById)
+  .put(AchievementsController.update);
 
 module.exports = router;
