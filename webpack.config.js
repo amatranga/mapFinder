@@ -1,5 +1,5 @@
-import webpack from 'webpack';
-import path from 'path';
+const webpack = require('webpack');
+const path = require('path');
 
 const config = {
   entry: './client/src/index.jsx',
@@ -33,4 +33,4 @@ const config = {
   devtool: 'source-map'
 };
 
-export default config;
+module.exports = config;
