@@ -22,6 +22,10 @@ module.exports.homeRedirect = (req, res, next) => {
   res.render('index.ejs', {user: JSON.stringify(req.user)});
 };
 
+module.exports.render = (req, res) => {
+  res.render('index.ejs', {user: JSON.stringify(req.user)});
+};
+
 module.exports.session = session({
   store: new RedisStore({
     client: redisClient,
