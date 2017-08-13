@@ -13,6 +13,9 @@ const Profile = db.Model.extend({
   },
   statistics: () => {
     return this.hasMany('user_id');
+  },
+  maps: () => {
+    return this.hasMany('user_id');
   }
 });
 

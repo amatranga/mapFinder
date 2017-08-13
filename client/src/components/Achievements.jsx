@@ -8,7 +8,14 @@ class Achievements extends React.Component {
   render() {
     return (
       <div>
-        <h4>This is the achievements page</h4>
+        <h1>Achievements</h1>
+        <div className="row text-center">
+          <h4>Achievement</h4>
+          <h4>Date Earned</h4>
+          <div>
+            <p>A list of achievements will go here</p>
+          </div>
+        </div>
       </div>
     );
   }

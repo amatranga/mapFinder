@@ -14,9 +14,9 @@ import Redirected from './Redirected';
 import PrivateRoute from './PrivateRoute';
 import Dashboard from './Dashboard';
 import MyMap from './MyMap';
-import Achievements from '/Achievements';
-import Statistics from '/Statistics';
-import Settings from '/Settings';
+import Achievements from './Achievements';
+import Statistics from './Statistics';
+import Settings from './Settings';
 
 const Routes = () => (
   <div className="container">

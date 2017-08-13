@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "build:watch": "webpack --watch",
+    "start:dev": "SET NODE_ENV=development && nodemon server/index.js",
+    "start:test": "SET NODE_ENV=test && nodemon server/index.js",
+    "start:prod": "SET NODE_ENV=production && nodemon server/index.js"
   },
   "author": "amatranga",
   "license": "ISC",
@@ -16,10 +20,15 @@
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.17.2",
     "bookshelf": "^0.10.4",
+    "connect-flash": "^0.1.1",
+    "connect-redis": "^3.3.0",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
+    "express-session": "^1.15.5",
     "knex": "^0.13.0",
+    "morgan": "^1.8.2",
     "node": "^8.2.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",

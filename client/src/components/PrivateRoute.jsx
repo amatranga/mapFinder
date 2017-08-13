@@ -4,10 +4,10 @@ import {
   Redirect
 } from 'react-router-dom';
 
-const PrivateRoute = ({component: Component, loggedIn, ...rest}) => {
+function PrivateRoute ({component: Component, loggedIn, rest}) {
   return (
     <Route {...rest}
-      render={props => 
+      render={(props) => 
         window.user ?
           <Component {...props} />
         :
