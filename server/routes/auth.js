@@ -42,4 +42,4 @@ router.get('/auth/facebook/callback',
   {failureRedirect: '/'}),
   middleware.auth.redirect);
 
-module.exports = router/
+module.exports = router;
