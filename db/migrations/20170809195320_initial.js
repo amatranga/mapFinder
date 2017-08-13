@@ -34,12 +34,17 @@ exports.up = function(knex, Promise) {
       table.increments('id').unsigned().primary();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       //TODO: Insert table.boolean here for each setting. Default to false
+    }),
+    knex.schema.createTableIfNotExists('maps', (table) => {
+      table.increments('id').unsigned().primary();
+      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
     })
   ]);
 };
 
 exports.down = function(knex, Promise) {
   return Promise.all([
+    knex.schema.dropTable('maps'),
     knex.schema.dropTable('settings'),
     knex.schema.dropTable('statistics'),
     knex.schema.dropTable('achievements'),
