@@ -41,7 +41,7 @@ passport.use('google', new GoogleStrategy({
 );
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
-  return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
+  return models.Auths.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })
     .then(oauthAccount => {
@@ -52,7 +52,7 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
         //Facebook users can register a phone number, which Passport does not expect
         throw null;
       }
-      return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
+      return models.Profiles.where({ email: oauthProfile.emails[0].value }).fetch();
     })
     .then(profile => {
       let profileInfo = {
@@ -65,10 +65,10 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
       if (profile) {
         return profile.save(profileInfo, { method: 'update' });
       }
-      return models.Profile.forge(profileInfo).save();
+      return models.Profiles.forge(profileInfo).save();
     })
     .tap(profile => {
-      return models.Auth.forge({
+      return models.Auths.forge({
         type,
         profile_id: profile.get('id'),
         oauth_id: oauthProfile.id
