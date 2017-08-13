@@ -8,7 +8,11 @@ class Statistics extends React.Component {
   render() {
     return (
       <div>
-        <h4>This is where the statistics will be</h4>
+        <h1>Statistics</h1>
+        <div className="row text-center">
+          <h4>Stat</h4>
+          <h4>Value</h4>
+        </div>
       </div>
     );
   }
