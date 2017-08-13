@@ -9,6 +9,7 @@ exports.seed = (knex, Promise) => {
     return models.Profile.forge({
       first: 'System',
       last: 'Admin',
+      display: 'SuperUser',
       email: 'admin@domain.com',
       country: 'USA'
     }).save();

@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
       table.increments('id').unsigned().primary();
       table.string('first', 100).nullable();
       table.string('last', 100).nullable();
+      table.string('display', 100).nullable();
       table.string('email', 100).nullable().unique();
       table.string('country', 100).notNullable();
       table.json('maps').nullable();
