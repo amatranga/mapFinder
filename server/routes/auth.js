@@ -36,9 +36,9 @@ router.get('/auth/google', middleware.passport.authenticate('google', {
 
 router.get('/auth/google/callback',
   middleware.passport.authenticate('google', 
-  {failureRedirect:'/failure',
-   successRedirect: '/success'
-}));
+  {failureRedirect:'/failure'}),
+  middleware.auth.homeRedirect);
+
 
 router.get('/auth/facebook', middleware.passport.authenticate('facebook', {
   scope: ['public_profile', 'email']
@@ -46,8 +46,7 @@ router.get('/auth/facebook', middleware.passport.authenticate('facebook', {
 
 router.get('/auth/facebook/callback',
   middleware.passport.authenticate('facebook', 
-  {successRedirect: '/success',
-   failureRedirect: '/failure'  
-}));
+  {failureRedirect: '/failure'}),
+  middleware.auth.redirect);
 
 module.exports = router;
