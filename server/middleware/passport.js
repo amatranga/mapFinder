@@ -15,13 +15,21 @@ passport.deserializeUser((id, done) => {
       }
       done(null, profile.serialize());
     })
-    .error(err => {
-      done(err, null);l
+    .error(error => {
+      done(error, null);
     })
     .catch(() => {
-      done(null, null, { message: 'No user found'});
+      done(null, null, { message: 'No user found' });
     });
 });
+
+passport.use('google', new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: process.env.GOOGLE_CALLBACKURL
+},
+  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done))
+);
 
 passport.use('facebook', new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
@@ -29,32 +37,27 @@ passport.use('facebook', new FacebookStrategy({
   callbackURL: process.env.FACEBOOK_CALLBACKURL,
   profileFields: ['id', 'emails', 'name']
 },
-  (token, refreshToken, profile, done) => getOrCreateOAuthProfile('facebook', profile, done))
-);
-
-passport.use('google', new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: process.env.GOOGLE_CALLBACKURL
-},
-  (token, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done))
+  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('facebook', profile, done))
 );
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
-  return models.Auths.where({ type, oauth_id: oauthProfile.id }).fetch({
+  return models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
     withRelated: ['profile']
   })
     .then(oauthAccount => {
+
       if (oauthAccount) {
         throw oauthAccount;
       }
+
       if (!oauthProfile.emails || !oauthProfile.emails.length) {
-        //Facebook users can register a phone number, which Passport does not expect
+        // FB users can register with a phone number, which is not exposed by Passport
         throw null;
       }
-      return models.Profiles.where({ email: oauthProfile.emails[0].value }).fetch();
+      return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
     })
     .then(profile => {
+
       let profileInfo = {
         first: oauthProfile.name.givenName,
         last: oauthProfile.name.familyName,
@@ -63,12 +66,14 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
       };
 
       if (profile) {
+        //update profile with info from oauth
         return profile.save(profileInfo, { method: 'update' });
       }
-      return models.Profiles.forge(profileInfo).save();
+      // otherwise create new profile
+      return models.Profile.forge(profileInfo).save();
     })
     .tap(profile => {
-      return models.Auths.forge({
+      return models.Auth.forge({
         type,
         profile_id: profile.get('id'),
         oauth_id: oauthProfile.id
@@ -89,9 +94,12 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
       }
     })
     .catch(() => {
-      done(null, null, {'message': 'Signing up requires an email address, \
-      please be sure there is an email address associated with your Facebook account \
-      and grant access when you register.' });
+      // TODO: This is not working because redirect to login uses req.flash('loginMessage')
+      // and there is no access to req here
+      done(null, null, {
+        'message': 'Signing up requires an email address, \
+          please be sure there is an email address associated with your Facebook account \
+          and grant access when you register.' });
     });
 };
 

@@ -1,8 +1,8 @@
 require('dotenv').config();
 
-module.exports = {
+if (process.env.NODE_ENV === 'development') {
   //Development database
-  development: {
+  module.exports = {
     client: 'postgresql',
     connection: {
       database: process.env.DB_DATABASE,
@@ -22,13 +22,15 @@ module.exports = {
     seeds: {
       directory: 'db/seeds/development'
     }
-  },
+  }
+}
 
+if (process.env.NODE_ENV === 'test') {
+  module.exports = {
   //Testing database
-  test: {
     client: 'postgresql',
     connection: {
-      database: 'testing_db',
+      database: 'mapfinder_testing_db',
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       host: process.env.DB_HOST
@@ -44,10 +46,12 @@ module.exports = {
     seeds: {
       directory: 'db/seeds/test'
     }
-  },
+  }
+}
 
+if (process.env.NODE_ENV === 'production') {
+  module.exports = {
   //Production database
-  production: {
     client: 'postgresql',
     connection: process.env.DATABASE_URL,
     pool: {

@@ -6,8 +6,7 @@ exports.up = function(knex, Promise) {
       table.string('last', 100).nullable();
       table.string('display', 100).nullable();
       table.string('email', 100).nullable().unique();
-      table.string('country', 100).notNullable();
-      table.json('maps').nullable();
+      table.string('country', 100).nullable();
       table.timestamps(true, true);
     }),
     knex.schema.createTableIfNotExists('auths', (table) => {
@@ -15,11 +14,6 @@ exports.up = function(knex, Promise) {
       table.string('type', 8).notNullable();
       table.string('oauth_id', 30).nullable();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
-    }),
-    knex.schema.createTableIfNotExists('achievements', (table) => {
-      table.increments('id').unsigned().primary();
-      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
-      //TODO: Insert table.boolean here for each achievement. Default to false
     }),
     knex.schema.createTableIfNotExists('statistics', (table) => {
       table.increments('id').unsigned().primary();
@@ -29,26 +23,14 @@ exports.up = function(knex, Promise) {
       table.integer('country_size_sq_km').notNullable();
       table.string('percent_of_country_visited').notNullable();
       table.string('percent_of_world_visited').notNullable();
-      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
-    }),
-    knex.schema.createTableIfNotExists('settings', (table) => {
-      table.increments('id').unsigned().primary();
-      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
-      //TODO: Insert table.boolean here for each setting. Default to false
-    }),
-    knex.schema.createTableIfNotExists('maps', (table) => {
-      table.increments('id').unsigned().primary();
-      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
+      table.integer('profile_id').references('id').inTable('profiles').onDelete('CASCADE');
     })
   ]);
 };
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('maps'),
-    knex.schema.dropTable('settings'),
     knex.schema.dropTable('statistics'),
-    knex.schema.dropTable('achievements'),
     knex.schema.dropTable('auths'),
     knex.schema.dropTable('profiles')
   ]);

@@ -5,17 +5,8 @@ const Profile = db.Model.extend({
   auths: () => {
     return this.hasMany('Auth');
   },
-  achievements: () => {
-    return this.hasMany('user_id');
-  },
-  settings: () => {
-    return this.hasMany('user_id');
-  },
   statistics: () => {
-    return this.hasMany('user_id');
-  },
-  maps: () => {
-    return this.hasMany('user_id');
+    return this.hasOne('Statistic');
   }
 });
 

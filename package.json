@@ -6,9 +6,10 @@
   "scripts": {
     "build": "webpack",
     "build:watch": "webpack --watch",
-    "start:dev": "SET NODE_ENV=development && nodemon server/index.js",
-    "start:test": "SET NODE_ENV=test && nodemon server/index.js",
-    "start:prod": "SET NODE_ENV=production && nodemon server/index.js"
+    "env:dev": "$env:NODE_ENV=\"development\"",
+    "env:prod": "$env:NODE_ENV=\"production\"",
+    "env:test": "$env:NODE_ENV=\"test\"",
+    "start": "nodemon server/index.js"
   },
   "author": "amatranga",
   "license": "ISC",
