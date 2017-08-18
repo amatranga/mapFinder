@@ -1,6 +1,6 @@
-exports.up = function(knex, Promise) {
+exports.up = function (knex, Promise) {
   return Promise.all([
-    knex.schema.createTableIfNotExists('profiles', (table) => {
+    knex.schema.createTableIfNotExists('profiles', function (table) {
       table.increments('id').unsigned().primary();
       table.string('first', 100).nullable();
       table.string('last', 100).nullable();
@@ -9,28 +9,19 @@ exports.up = function(knex, Promise) {
       table.string('country', 100).nullable();
       table.timestamps(true, true);
     }),
-    knex.schema.createTableIfNotExists('auths', (table) => {
+    knex.schema.createTableIfNotExists('auths', function(table) {
       table.increments('id').unsigned().primary();
       table.string('type', 8).notNullable();
       table.string('oauth_id', 30).nullable();
+      table.string('password', 100).nullable();
+      table.string('salt', 100).nullable();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
-    }),
-    knex.schema.createTableIfNotExists('statistics', (table) => {
-      table.increments('id').unsigned().primary();
-      table.integer('sq_mi_visited').notNullable();
-      table.integer('sq_km_visited').notNullable();
-      table.integer('country_size_sq_mi').notNullable();
-      table.integer('country_size_sq_km').notNullable();
-      table.string('percent_of_country_visited').notNullable();
-      table.string('percent_of_world_visited').notNullable();
-      table.integer('profile_id').references('id').inTable('profiles').onDelete('CASCADE');
     })
   ]);
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function (knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('statistics'),
     knex.schema.dropTable('auths'),
     knex.schema.dropTable('profiles')
   ]);

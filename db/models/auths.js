@@ -2,7 +2,7 @@ const db = require('../');
 
 const Auth = db.Model.extend({
   tableName: 'auths',
-  profile: () => {
+  profiles: () => {
     return this.belongsTo('Profile')
   }
 });
