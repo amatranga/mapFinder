@@ -33,6 +33,6 @@ module.exports.session = session({
     port: 6739
   }),
   secret: 'We should get to mapping stuff out',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
 });

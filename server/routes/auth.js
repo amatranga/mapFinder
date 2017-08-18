@@ -18,6 +18,12 @@ router.route('/statistics')
 router.route('/settings')
   .get(middleware.auth.verify, middleware.auth.render);
 
+router.route('/login')
+  .get((req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
+
 router.route('/logout')
   .get((req, res) => {
     req.logout();
@@ -30,8 +36,9 @@ router.get('/auth/google', middleware.passport.authenticate('google', {
 
 router.get('/auth/google/callback',
   middleware.passport.authenticate('google', 
-  {failureRedirect: '/'}),
-  middleware.auth.redirect);
+  {failureRedirect:'/failure',
+   successRedirect: '/success'
+}));
 
 router.get('/auth/facebook', middleware.passport.authenticate('facebook', {
   scope: ['public_profile', 'email']
@@ -39,7 +46,8 @@ router.get('/auth/facebook', middleware.passport.authenticate('facebook', {
 
 router.get('/auth/facebook/callback',
   middleware.passport.authenticate('facebook', 
-  {failureRedirect: '/'}),
-  middleware.auth.redirect);
+  {successRedirect: '/success',
+   failureRedirect: '/failure'  
+}));
 
 module.exports = router;
