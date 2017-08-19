@@ -13,14 +13,14 @@ module.exports.verify = (req, res, next) => {
 };
 
 module.exports.redirect = (req, res) => {
-  let redirect = req.session.returnTo || '/dashboard';
+  let redirect = req.session.returnTo || '/home';
   delete req.session.returnTo;
   res.redirect(redirect);
 };
 
 module.exports.homeRedirect = (req, res, next) => {
   if (req.user) {
-    return res.redirect('/dashboard');
+    return res.redirect('/home');
   }
   next();
 };
