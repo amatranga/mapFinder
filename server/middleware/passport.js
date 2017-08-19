@@ -1,6 +1,6 @@
 const passport = require('passport');
-const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const models = require('../../db/models');
 
 passport.serializeUser((profile, done) => {
@@ -45,11 +45,9 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
     withRelated: ['profile']
   })
     .then(oauthAccount => {
-
       if (oauthAccount) {
         throw oauthAccount;
       }
-
       if (!oauthProfile.emails || !oauthProfile.emails.length) {
         // FB users can register with a phone number, which is not exposed by Passport
         throw null;
@@ -57,14 +55,12 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
       return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
     })
     .then(profile => {
-
       let profileInfo = {
         first: oauthProfile.name.givenName,
         last: oauthProfile.name.familyName,
         display: oauthProfile.displayName || `${oauthProfile.name.givenName} ${oauthProfile.name.familyName}`,
         email: oauthProfile.emails[0].value
       };
-
       if (profile) {
         //update profile with info from oauth
         return profile.save(profileInfo, { method: 'update' });
@@ -74,7 +70,7 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
     })
     .tap(profile => {
       return models.Auth.forge({
-        type: oauthProfile.provider,
+        type,
         profile_id: profile.get('id'),
         oauth_id: oauthProfile.id
       }).save();
