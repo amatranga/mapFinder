@@ -9,12 +9,14 @@ class Achievements extends React.Component {
     return (
       <div>
         <h1>Achievements</h1>
-        <div className="row text-center">
-          <h4>Achievement</h4>
-          <h4>Date Earned</h4>
+        <div className="text-center">
           <div>
-            <p>A list of achievements will go here</p>
+            <h4>Achievement</h4>
           </div>
+          <div>
+            <h4>Date Earned</h4>
+          </div>
+          <p>A list of achievements will go here</p>
         </div>
       </div>
     );

@@ -6,7 +6,7 @@ const router = express.Router();
 router.route('/')
   .get(middleware.auth.homeRedirect, middleware.auth.render);
 
-router.route('/dashboard')
+router.route('/home')
   .get(middleware.auth.verify, middleware.auth.render);
 
 router.route('/myMap')

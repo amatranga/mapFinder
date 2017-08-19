@@ -12,7 +12,6 @@ import {
 import Home from './Home';
 import Redirected from './Redirected';
 import PrivateRoute from './PrivateRoute';
-import Dashboard from './Dashboard';
 import MyMap from './MyMap';
 import Achievements from './Achievements';
 import Statistics from './Statistics';
@@ -23,7 +22,7 @@ const Routes = () => (
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
-        <PrivateRoute path="/dashboard" component={Home} />
+        <PrivateRoute path="/home" component={Home} />
         <PrivateRoute path="/myMap" component={MyMap} />
         <PrivateRoute path="/achievements" component={Achievements} />
         <PrivateRoute path="/statistics" component={Statistics} />

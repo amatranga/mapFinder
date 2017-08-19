@@ -7,11 +7,9 @@ class Settings extends React.Component {
 
   render() {
     return (
-      <div className="row text-center">
+      <div className="text-center">
         <h1>User Settings</h1>
-        <div>
-          <p>A list of the settings will go here</p>
-        </div>
+        <p>A list of the settings will go here</p>
       </div>
     );
   }
