@@ -20,7 +20,7 @@ exports.seed = (knex, Promise) => {
   })
   .then((profile) => {
     return models.Auth.forge({
-      type: 'Google',
+      type: 'google',
       oauth_id: '000001',
       profile_id: profile.get('id')
     }).save();
