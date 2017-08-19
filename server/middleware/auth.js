@@ -19,7 +19,7 @@ module.exports.redirect = (req, res) => {
 };
 
 module.exports.homeRedirect = (req, res, next) => {
-    if (req.user) {
+  if (req.user) {
     return res.redirect('/dashboard');
   }
   next();
