@@ -9,9 +9,13 @@ class Statistics extends React.Component {
     return (
       <div>
         <h1>Statistics</h1>
-        <div className="row text-center">
-          <h4>Stat</h4>
-          <h4>Value</h4>
+        <div className="text-center">
+          <div>
+            <h4>Stat</h4>
+          </div>
+          <div>
+            <h4>Value</h4>
+          </div>
         </div>
       </div>
     );
