@@ -5,16 +5,11 @@ import OAuth from './OAuth.jsx';
 import Menu from './Menu.jsx';
 import Description from './Description.jsx';
 
-const LoggedOutImgStyle = {
+const imgStyle = {
   background: 'url(/assets/vintage.jpg) no-repeat center',
   maxWidth: '100%',
   height: '38em'
 };
-
-const LoggedInImgStyle = {
-  background: 'url(/assets/vintage.jpg) no-repeat center',
-  maxWidth: '100%'
-}
 
 const Home = () => {
   const user = window.user;
@@ -22,7 +17,7 @@ const Home = () => {
   if (!user) {
     return (
       <div>
-        <div className="col justify-content-center" style={LoggedOutImgStyle}>
+        <div className="col justify-content-center" style={imgStyle}>
           <Splash />
           <br />
           <Description />
@@ -34,7 +29,7 @@ const Home = () => {
     );
   } else {
     return (
-      <div className="col justify-content-center" style={LoggedInImgStyle}>
+      <div className="col justify-content-center" style={imgStyle}>
         <Splash />
         <br />
         <Menu />
