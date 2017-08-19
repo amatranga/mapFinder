@@ -19,7 +19,10 @@ module.exports.redirect = (req, res) => {
 };
 
 module.exports.homeRedirect = (req, res, next) => {
-  res.render('index.ejs', {user: JSON.stringify(req.user)});
+    if (req.user) {
+    return res.redirect('/dashboard');
+  }
+  next();
 };
 
 module.exports.render = (req, res) => {
