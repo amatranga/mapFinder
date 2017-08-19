@@ -4,7 +4,10 @@ const middleware = require('../middleware');
 const router = express.Router();
 
 router.route('/')
-  .get(middleware.auth.homeRedirect);
+  .get(middleware.auth.homeRedirect, middleware.auth.render);
+
+router.route('/dashboard')
+  .get(middleware.auth.verify, middleware.auth.render);
 
 router.route('/myMap')
   .get(middleware.auth.verify, middleware.auth.render);
