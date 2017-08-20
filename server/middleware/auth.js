@@ -12,6 +12,13 @@ module.exports.verify = (req, res, next) => {
   res.redirect('/login');
 };
 
+module.exports.verifyCountry = (req, res, next) => {
+  if (req.user.country) {
+    return next();
+  }
+  res.redirect('/country');
+}
+
 module.exports.redirect = (req, res) => {
   let redirect = req.session.returnTo || '/home';
   delete req.session.returnTo;
