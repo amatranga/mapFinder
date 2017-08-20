@@ -9,8 +9,11 @@ router.route('/')
 router.route('/home')
   .get(middleware.auth.verify, middleware.auth.render);
 
-router.route('/myMap')
+router.route('/country')
   .get(middleware.auth.verify, middleware.auth.render);
+
+router.route('/myMap')
+  .get(middleware.auth.verifyCountry, middleware.auth.render);
 
 router.route('/achievements')
   .get(middleware.auth.verify, middleware.auth.render);
