@@ -1,9 +1,9 @@
 import React from 'react';
-import MyMapButton from './MyMapButton.jsx';
-import AchievementsButton from './AchievementsButton.jsx';
-import StatisticsButton from './StatisticsButton.jsx';
-import SettingsButton from './SettingsButton.jsx';
-import LogoutButton from './LogoutButton.jsx';
+import MyMapButton from '../buttons/MyMapButton.jsx';
+import AchievementsButton from '../buttons/AchievementsButton.jsx';
+import StatisticsButton from '../buttons/StatisticsButton.jsx';
+import SettingsButton from '../buttons/SettingsButton.jsx';
+import LogoutButton from '../buttons/LogoutButton.jsx';
 
 const textStyle = {
   padding: '1em',

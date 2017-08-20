@@ -9,14 +9,14 @@ import {
   Switch
 } from 'react-router-dom';
 
-import Country from './Country';
-import Home from './Home';
-import Redirected from './Redirected';
-import PrivateRoute from './PrivateRoute';
-import MyMap from './MyMap';
-import Achievements from './Achievements';
-import Statistics from './Statistics';
-import Settings from './Settings';
+import Country from './user/Country';
+import Home from './page/Home';
+import Redirected from './functions/Redirected';
+import PrivateRoute from './functions/PrivateRoute';
+import MyMap from './user/MyMap';
+import Achievements from './user/Achievements';
+import Statistics from './user/Statistics';
+import Settings from './user/Settings';
 
 const Routes = () => (
   <div className="container">
