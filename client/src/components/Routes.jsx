@@ -9,6 +9,7 @@ import {
   Switch
 } from 'react-router-dom';
 
+import Country from './Country';
 import Home from './Home';
 import Redirected from './Redirected';
 import PrivateRoute from './PrivateRoute';
@@ -22,6 +23,7 @@ const Routes = () => (
     <Router>
       <Switch>
         <Route exact path="/" component={Home} />
+        <PrivateRoute path="/country" component = {Country} />
         <PrivateRoute path="/home" component={Home} />
         <PrivateRoute path="/myMap" component={MyMap} />
         <PrivateRoute path="/achievements" component={Achievements} />
