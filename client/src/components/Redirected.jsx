@@ -1,5 +1,5 @@
 import React from 'react';
-import OAuth from './OAuth'
+import OAuth from './buttons/OAuth'
 
 const Redirect = () => (
   <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Splash from './Splash.jsx';
-import OAuth from './OAuth.jsx';
+import OAuth from './buttons/OAuth.jsx';
 import Menu from './Menu.jsx';
 import Description from './Description.jsx';
 
